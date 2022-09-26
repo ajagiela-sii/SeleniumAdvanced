@@ -1,0 +1,5 @@
+browser:
+  browser_name: chrome
+  url: http://146.59.32.4/index.php
+  headless: false
+  title: TesterSii
