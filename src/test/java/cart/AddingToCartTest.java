@@ -18,7 +18,7 @@ public class AddingToCartTest extends Pages {
         Product product = new Product(productViewPage);
 
         productViewPage.setQuantity(quantity)
-                    .addProductToCart();
+                .addProductToCart();
 
         assertThat(addedToCartPage.getProductName()).isEqualTo(product.getName());
         assertThat(addedToCartPage.getPrice()).isEqualTo(product.getPrice());

@@ -2,7 +2,6 @@ package cart;
 
 import base.Pages;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import pages.order.OrderedItemPage;
 
 import java.text.DateFormat;
@@ -39,7 +38,7 @@ public class CheckoutTest extends Pages {
         headerPage.goToSignIn();
         userSteps.signIn();
         headerPage.typeInSearchField(productName)
-                        .clickSearchBtn();
+                .clickSearchBtn();
         productsGridPage.clickProduct(productName);
         productViewPage.addProductToCart();
         addedToCartPage.proceedToCheckout();

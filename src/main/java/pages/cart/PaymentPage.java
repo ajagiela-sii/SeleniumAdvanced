@@ -37,4 +37,4 @@ public class PaymentPage extends PageBase {
         waitToBeClickable(placeOrderBtn);
         click(placeOrderBtn);
     }
- }
+}

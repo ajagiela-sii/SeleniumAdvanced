@@ -4,12 +4,10 @@ import base.Pages;
 import models.Cart;
 import models.Product;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +15,9 @@ public class AddingAndRemovingFromCartTest extends Pages {
 
     @RepeatedTest(10)
     void shouldAddAndRemoveFromCart() {
-        for(int i = 0; i < 5; i++) {
-            int quantity = new Random().nextInt(1,6);
-           headerPage.getRandomCategory();
+        for (int i = 0; i < 5; i++) {
+            int quantity = new Random().nextInt(1, 6);
+            headerPage.getRandomCategory();
             productsGridPage.clickProduct(productsGridPage.getRandomProduct());
             productViewPage.customizeIfPossible("MY MUG")
                     .setQuantity(quantity);

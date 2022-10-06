@@ -41,6 +41,7 @@ public class OrderSummaryPage extends PageBase {
     public String getPaymentMethod() {
         return paymentMethod.getText();
     }
+
     public String getShippingMethod() {
         return shippingMethod.getText();
     }
@@ -48,8 +49,6 @@ public class OrderSummaryPage extends PageBase {
     public String getOrderReference() {
         return orderReference.getText().split(": ")[1];
     }
-
-
 
 
 }

@@ -7,7 +7,8 @@ public class User {
     private String email;
     private String password;
 
-    private User(){}
+    private User() {
+    }
 
     public static UserBuilder builder() {
         return new UserBuilder();

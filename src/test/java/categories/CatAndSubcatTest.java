@@ -4,7 +4,6 @@ import base.Pages;
 import org.junit.jupiter.api.Test;
 import pages.homepage.MenuCategoryPage;
 
-
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

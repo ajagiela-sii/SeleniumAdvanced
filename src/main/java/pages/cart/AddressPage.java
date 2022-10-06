@@ -27,22 +27,23 @@ public class AddressPage extends PageBase {
     private WebElement addNewInvoiceAddress;
     @FindBy(css = "#invoice-addresses .address-item:last-of-type .delete-address")
     private WebElement deleteAddress;
+
     public AddressPage(WebDriver driver) {
         super(driver);
     }
+
     public AddressPage clickOtherBillingAddress() {
         click(otherBillingAddress);
         return this;
     }
 
     public AddressPage deleteInvoiceAddressIfPossible() {
-        if (isVisible(invoiceAddress)){
+        if (isVisible(invoiceAddress)) {
             click(deleteAddress);
             return this;
         }
         return this;
     }
-
 
 
     public AddressPage fillAddress(String address, String city, String state, String postcode) {

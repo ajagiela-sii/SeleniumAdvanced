@@ -11,6 +11,7 @@ public class ShippingPage extends PageBase {
     private WebElement myCarrierDelivery;
     @FindBy(css = "button[name=confirmDeliveryOption]")
     private WebElement confirmDeliveryOptionBtn;
+
     public ShippingPage(WebDriver driver) {
         super(driver);
     }

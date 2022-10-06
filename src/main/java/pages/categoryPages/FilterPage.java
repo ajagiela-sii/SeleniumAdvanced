@@ -66,7 +66,7 @@ public class FilterPage extends PageBase {
 
         actions.clickAndHold(sliderHandle).perform();
         while (getCurrentMaxPrice() != price && getCurrentMinPrice() != price) {
-            actions.moveByOffset((int) (direction * (sliderWidth/(maxPrice-minPrice))), 0).perform();
+            actions.moveByOffset((int) (direction * (sliderWidth / (maxPrice - minPrice))), 0).perform();
         }
         actions.release().perform();
         waitForElementDisappear(spinner);

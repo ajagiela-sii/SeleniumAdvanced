@@ -4,7 +4,6 @@ import base.PageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.order.OrderHistoryRowPage;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class OrderHistoryPage extends PageBase {
     }
 
     public OrderHistoryRowPage getOrder(String orderReference) {
-       return getOrders().stream().filter(e -> e.getOrderReference().equalsIgnoreCase(orderReference)).findFirst().get();
+        return getOrders().stream().filter(e -> e.getOrderReference().equalsIgnoreCase(orderReference)).findFirst().get();
     }
 
 

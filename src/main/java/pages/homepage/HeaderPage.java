@@ -48,6 +48,7 @@ public class HeaderPage extends PageBase {
     public String getCartCount() {
         return cartCount.getText();
     }
+
     public List<String> getFoundHints() {
         waitForVisibility(searchHints);
         return searchHints.stream().map(e -> e.getAttribute("textContent")).collect(Collectors.toList());
@@ -80,6 +81,7 @@ public class HeaderPage extends PageBase {
     public void goToSignIn() {
         click(signIn);
     }
+
     public void goToAccount() {
         click(account);
     }

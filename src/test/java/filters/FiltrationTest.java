@@ -14,7 +14,6 @@ public class FiltrationTest extends Pages {
     void shouldSetPriceFilter_AndCheck_ifProductsAreFiltered() {
         double min = 15.00;
         double max = 17.00;
-       // headerPage.goToCategory("art");
         headerPage.goToCategory("accessories");
         filterPage.setMinimumPrice(min)
                 .setMaximumPrice(max);
