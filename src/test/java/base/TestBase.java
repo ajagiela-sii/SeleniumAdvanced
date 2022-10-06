@@ -1,8 +1,8 @@
 package base;
 
 import configuration.ConfigReader;
-import driverFactory.BrowserList;
-import driverFactory.DriverFactory;
+import driver.BrowserList;
+import driver.DriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

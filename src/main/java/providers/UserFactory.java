@@ -1,10 +1,11 @@
-package models;
+package providers;
 
 import com.github.javafaker.Faker;
+import models.User;
 
 public class UserFactory {
 
-    public User getRandomUser() {
+    public static User getRandomUser() {
         Faker faker = new Faker();
         return User.builder()
                 .firstName(faker.name().firstName())
@@ -13,7 +14,7 @@ public class UserFactory {
                 .password(faker.internet().password(8, 24, true, true))
                 .build();
     }
-    public User getAlreadyRegisteredUser() {
+    public static User getAlreadyRegisteredUser() {
         return User.builder()
                 .firstName("John")
                 .lastName("Smith")

@@ -12,11 +12,11 @@ public class SearchTests extends Pages {
 
     @Test
     public void itemFromHomePage_shouldBeFound() {
-        String prodTitle = productsPage.getRandomProduct().getProductTitle();
+        String prodTitle = productsGridPage.getRandomProduct().getProductTitle();
         headerPage.typeInSearchField(prodTitle)
                 .clickSearchBtn();
 
-        assertThat(productsPage.getProducts().stream().map(ItemPage::getProductTitle)).contains(prodTitle);
+        assertThat(productsGridPage.getProducts().stream().map(ItemPage::getProductTitle)).contains(prodTitle);
     }
 
     @ParameterizedTest

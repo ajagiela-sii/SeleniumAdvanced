@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CategoryBasePage extends PageBase {
+public class CategoryPage extends PageBase {
 
     @FindBy(css = "#js-product-list-header h1")
     private WebElement categoryBlock;
@@ -16,7 +16,7 @@ public class CategoryBasePage extends PageBase {
     @FindBy(css = "#search_filters")
     private WebElement filterBlock;
 
-    public CategoryBasePage(WebDriver driver) {
+    public CategoryPage(WebDriver driver) {
         super(driver);
     }
 

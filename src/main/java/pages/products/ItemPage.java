@@ -1,15 +1,11 @@
 package pages.products;
 
+import base.PageBase;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-public class ItemPage {
-
-    public ItemPage(WebElement item) {
-        PageFactory.initElements(new DefaultElementLocatorFactory(item), this);
-    }
+public class ItemPage extends PageBase {
 
     @FindBy(css = ".product-title")
     private WebElement productTitle;
@@ -17,11 +13,22 @@ public class ItemPage {
     @FindBy(css = ".price")
     private WebElement price;
 
+    @FindBy(css = ".product-miniature")
+    private WebElement product;
+
+    public ItemPage(WebDriver driver, WebElement webElement) {
+        super(driver, webElement);
+    }
+
     public String getProductTitle() {
         return productTitle.getText();
     }
 
-    public float getProductPrice() {
-        return Float.parseFloat(price.getText().replace("$", ""));
+    public double getProductPrice() {
+        return getPrice(price);
+    }
+
+    public WebElement getProduct() {
+        return product;
     }
 }

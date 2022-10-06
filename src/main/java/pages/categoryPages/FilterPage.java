@@ -12,6 +12,9 @@ public class FilterPage extends PageBase {
     @FindBy(css = ".facet")
     private List<WebElement> allFacets;
 
+    @FindBy(css = ".faceted-slider")
+    private WebElement slider;
+
     @FindBy(css = ".ui-slider-handle:nth-of-type(1)")
     private WebElement leftPriceSliderHandle;
 
@@ -27,7 +30,6 @@ public class FilterPage extends PageBase {
     @FindBy(css = ".js-search-filters-clear-all")
     private WebElement clearAllFiltersBtn;
 
-
     public FilterPage(WebDriver driver) {
         super(driver);
     }
@@ -39,58 +41,52 @@ public class FilterPage extends PageBase {
         return this;
     }
 
-    public FilterPage setMinimumPrice(float price) {
-        if (getCurrentMinPrice() == price) {
+    public FilterPage setMinimumPrice(double price) {
+        return moveSlider(price, getCurrentMinPrice(), leftPriceSliderHandle);
+    }
+
+    public FilterPage setMaximumPrice(double price) {
+        return moveSlider(price, getCurrentMaxPrice(), rightPriceSliderHandle);
+    }
+
+    private FilterPage moveSlider(double price, double currentPrice, WebElement sliderHandle) {
+
+        if (currentPrice == price) {
             return this;
         }
-        if (getCurrentMinPrice() > price && leftPriceSliderHandle.getAttribute("style").equals("left: 0%;")) {
+        double minPrice = Double.parseDouble(slider.getAttribute("data-slider-min"));
+        double maxPrice = Double.parseDouble(slider.getAttribute("data-slider-max"));
+        int sliderWidth = slider.getSize().width;
+
+        if (price < minPrice || price > maxPrice) {
             return this;
         }
 
-        int direction = getDirection(price, getCurrentMinPrice());
+        int direction = getDirection(price, currentPrice);
 
-        actions.clickAndHold(leftPriceSliderHandle).perform();
-        while (getCurrentMinPrice() != price) {
-            actions.moveByOffset(direction * 10, 0).perform();
+        actions.clickAndHold(sliderHandle).perform();
+        while (getCurrentMaxPrice() != price && getCurrentMinPrice() != price) {
+            actions.moveByOffset((int) (direction * (sliderWidth/(maxPrice-minPrice))), 0).perform();
         }
         actions.release().perform();
         waitForElementDisappear(spinner);
         return this;
     }
 
-    public FilterPage setMaximumPrice(float price) {
-        if (getCurrentMaxPrice() == price) {
-            return this;
-        }
-        if (getCurrentMaxPrice() < price && rightPriceSliderHandle.getAttribute("style").equals("left: 100%;")) {
-            return this;
-        }
-
-        int direction = getDirection(price, getCurrentMaxPrice());
-
-        actions.clickAndHold(rightPriceSliderHandle).perform();
-        while (getCurrentMaxPrice() != price) {
-            actions.moveByOffset(direction * 10, 0).perform();
-        }
-        actions.release().perform();
-        waitForElementDisappear(spinner);
-        return this;
+    private String[] getCurrentPriceFilter() {
+        return getStringPrice(currentPriceFilter).split("-");
     }
 
-    public String[] getCurrentPriceFilter() {
-        return currentPriceFilter.getText().replace("$", "").split("-");
+    private Double getCurrentMinPrice() {
+        return Double.parseDouble(getCurrentPriceFilter()[0]);
     }
 
-    private Float getCurrentMinPrice() {
-        return Float.valueOf(getCurrentPriceFilter()[0]);
+    private Double getCurrentMaxPrice() {
+        return Double.parseDouble(getCurrentPriceFilter()[1]);
     }
 
-    private Float getCurrentMaxPrice() {
-        return Float.valueOf(getCurrentPriceFilter()[1]);
-    }
-
-    private int getDirection(float price, float currentPrice) {
-        float difference = price - currentPrice;
+    private int getDirection(double price, double currentPrice) {
+        double difference = price - currentPrice;
         if (difference > 0) {
             return 1;
         }

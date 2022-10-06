@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -26,7 +27,12 @@ public class PageBase {
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         actions = new Actions(driver);
-
+    }
+    public PageBase(WebDriver driver, WebElement webElement) {
+        this.driver = driver;
+        PageFactory.initElements(new DefaultElementLocatorFactory(webElement), this);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        actions = new Actions(driver);
     }
 
     protected static <T> Object getRandomObject(List<T> objectList) {
@@ -34,13 +40,24 @@ public class PageBase {
     }
 
     protected void sendKey(WebElement webElement, String text) {
-        logger.info("Typing text: " + text + " in " + webElement);
+        String webElementName = webElement.getText().isEmpty() ? String.valueOf(webElement).split("->")[1] : webElement.getText();
+        logger.info("Typing text: " + text + " in " + webElementName);
+        webElement.sendKeys(text);
+
+    }
+
+    protected void sendKeyWithClear(WebElement webElement, String text) {
+        webElement.clear();
+        String webElementName = webElement.getText().isEmpty() ? String.valueOf(webElement).split("->")[1] : webElement.getText();
+        logger.info("Typing text: " + text + " in " + webElementName);
         webElement.sendKeys(text);
 
     }
 
     protected void click(WebElement webElement) {
-        logger.info("Clicking on " + webElement.getText());
+        String webElementName = webElement.getText().isEmpty() ? String.valueOf(webElement).split("->")[1] : webElement.getText();
+        logger.info("Clicking on " + webElementName);
+        waitToBeClickable(webElement);
         webElement.click();
     }
 
@@ -71,8 +88,11 @@ public class PageBase {
 
 
     public void waitForElementDisappear(WebElement webElement) {
-        logger.info("Waiting for invisibility of " + webElement);
-        wait.until(ExpectedConditions.invisibilityOf(webElement));
+        if (isVisible(webElement)) {
+            String webElementName = webElement.getText().isEmpty() ? String.valueOf(webElement).split("->")[1] : webElement.getText();
+            logger.info("Waiting for invisibility of " + webElementName);
+            wait.until(ExpectedConditions.invisibilityOf(webElement));
+        }
     }
 
     public void goToURL(String url) {
@@ -80,5 +100,11 @@ public class PageBase {
         driver.get(url);
     }
 
+    public String getStringPrice(WebElement webElement) {
+        return webElement.getText().replace("$", "");
+    }
 
+    public Double getPrice(WebElement webElement) {
+        return Double.parseDouble(webElement.getText().replace("$", ""));
+    }
 }

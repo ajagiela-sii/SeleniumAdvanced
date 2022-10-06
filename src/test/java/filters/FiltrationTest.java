@@ -4,7 +4,6 @@ import base.Pages;
 import org.junit.jupiter.api.Test;
 import pages.products.ItemPage;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,14 +12,14 @@ public class FiltrationTest extends Pages {
 
     @Test
     void shouldSetPriceFilter_AndCheck_ifProductsAreFiltered() {
-        float min = 8.00F;
-        float max = 10.00F;
-        headerPage.goToCategory("art");
+        double min = 15.00;
+        double max = 17.00;
+       // headerPage.goToCategory("art");
+        headerPage.goToCategory("accessories");
         filterPage.setMinimumPrice(min)
                 .setMaximumPrice(max);
-        System.out.println(Arrays.toString(filterPage.getCurrentPriceFilter()));
 
-        List<ItemPage> products = productsPage.getProducts();
+        List<ItemPage> products = productsGridPage.getProducts();
 
         assertThat(products).allMatch(p -> p.getProductPrice() >= min && p.getProductPrice() <= max);
     }

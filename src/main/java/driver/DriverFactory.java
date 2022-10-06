@@ -1,9 +1,9 @@
-package driverFactory;
+package driver;
 
-import driverFactory.manager.ChromeDriverManager;
-import driverFactory.manager.EdgeDriverManager;
-import driverFactory.manager.FirefoxDriverManager;
-import driverFactory.manager.IEDriverManager;
+import driver.manager.ChromeDriverManager;
+import driver.manager.EdgeDriverManager;
+import driver.manager.FirefoxDriverManager;
+import driver.manager.IEDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package categories;
 
 import base.Pages;
 import org.junit.jupiter.api.Test;
-import pages.fixedElements.MenuCategoryPage;
+import pages.homepage.MenuCategoryPage;
 
 
 import java.util.List;
@@ -18,11 +18,11 @@ public class CatAndSubcatTest extends Pages {
         for (int i = 0; i < categoriesAndSubcategories.size(); i++) {
             String categoryName = categoriesAndSubcategories.get(i).getCategoryName().toLowerCase();
             headerPage.goToCategory(categoryName);
-            int totalProductNumber = productsPage.getProducts().size();
+            int totalProductNumber = productsGridPage.getProducts().size();
 
-            assertThat(categoryBasePage.getCategoryHeader().toLowerCase()).isEqualTo(categoryName);
-            assertThat(categoryBasePage.filterIsDisplayed()).isTrue();
-            assertThat(categoryBasePage.getTotalProductsNumber()).contains(String.valueOf(totalProductNumber));
+            assertThat(categoryPage.getCategoryHeader().toLowerCase()).isEqualTo(categoryName);
+            assertThat(categoryPage.filterIsDisplayed()).isTrue();
+            assertThat(categoryPage.getTotalProductsNumber()).contains(String.valueOf(totalProductNumber));
 
             categoriesAndSubcategories = headerPage.getAllCategories();
         }
