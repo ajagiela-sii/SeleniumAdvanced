@@ -1,7 +1,6 @@
 package pages.products;
 
 import base.PageBase;
-import models.Cart;
 import models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,10 +40,9 @@ public class ProductViewPage extends PageBase {
         return quantity;
     }
 
-    public ProductViewPage addProductToCart() {
-        Cart.addProduct(new Product(this));
+    public Product addProductToCart() {
         addToCartBtn.click();
-        return this;
+        return new Product(this);
     }
 
     public ProductViewPage setQuantity(int quantity) {

@@ -11,8 +11,8 @@ public class CartPage extends PageBase {
 
     @FindBy(css = ".cart-item")
     private List<WebElement> cartItems;
-    @FindBy(css = ".cart-total .value")
-    private WebElement total;
+    @FindBy(css = "#cart-subtotal-products .value")
+    private WebElement subtotalValue;
     @FindBy(css = ".no-items")
     private WebElement emptyCart;
     @FindBy(css = ".cart-summary .btn-primary")
@@ -26,8 +26,8 @@ public class CartPage extends PageBase {
         return cartItems.stream().map(item -> new CartItemPage(driver, item)).toList();
     }
 
-    public double getTotalPrice() {
-        return getPrice(total);
+    public double getSubtotalPrice() {
+        return getPrice(subtotalValue);
     }
 
     public boolean isEmpty() {

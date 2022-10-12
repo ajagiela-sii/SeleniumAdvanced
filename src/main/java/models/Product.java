@@ -42,6 +42,11 @@ public class Product {
         return totalPrice;
     }
 
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+        this.totalPrice = Precision.round(this.price * this.quantity, 2);
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
         this.totalPrice = Precision.round(this.price * this.quantity, 2);
